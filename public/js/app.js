@@ -50,9 +50,21 @@ function requestProductsByCurrentPosition () {
 for (var i = 0; i < productPrices.responseJSON.products.length; i++) {
   console.log(productPrices.responseJSON.products[i].display_name);
 
-  var eachDisplay = productPrices.responseJSON.products[i].display_name;
-  var eachDes = productPrices.responseJSON.products[i].description;
-  $("h1").after("<h3>" + eachDisplay + "</h3>" + "<p>" + eachDes + "</p>");
+  // var eachDisplay = productPrices.responseJSON.products[i].display_name;
+  // var eachDes = productPrices.responseJSON.products[i].description;
+  // $("h1").after("<h3>" + eachDisplay + "</h3>" + "<p>" + eachDes + "</p>");
+
+  var h1 = document.getElementsByTagName("h1");
+  var body = document.getElementsByTagName("body");
+  var uberElement = document.createElement("div");
+  body[0].insertBefore(uberElement, h1[0].nextSibling);
+  var displayH3 = document.createElement("h3");
+  displayH3.innerHTML = productPrices.responseJSON.products[i].display_name;
+  uberElement.appendChild(displayH3);
+  var descP = document.createElement("p");
+  descP.innerHTML = productPrices.responseJSON.products[i].description;
+  uberElement.appendChild(descP);
+
 }
 
 
