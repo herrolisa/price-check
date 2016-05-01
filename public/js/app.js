@@ -5,7 +5,6 @@
  * @param  {number} lng The location's longitude value
  * @return {[Products]]} The Uber products available at the queried location
  */
-getProductsByLocation(21.3069, -157.8583);
 
 function getProductsByLocation (lat, lng) {
   var location = {
@@ -15,6 +14,9 @@ function getProductsByLocation (lat, lng) {
   var products = getProducts(location);
   return products;
 }
+
+var productPrices = getProductsByLocation(21.3069, -157.8583);
+console.log(productPrices);
 
 /**
  * Gets the products from a certain location.
@@ -42,3 +44,15 @@ function requestProductsByCurrentPosition () {
    */
   navigator.geolocation.getCurrentPosition(/* your function name goes here */);
 }
+
+
+
+for (var i = 0; i < productPrices.responseJSON.products.length; i++) {
+  console.log(productPrices.responseJSON.products[i].display_name);
+
+  var eachDisplay = productPrices.responseJSON.products[i].display_name;
+  var eachDes = productPrices.responseJSON.products[i].description;
+  $("h1").after("<h3>" + eachDisplay + "</h3>" + "<p>" + eachDes + "</p>");
+}
+
+
