@@ -50,10 +50,12 @@ function requestProductsByCurrentPosition () {
 for (var i = 0; i < productPrices.responseJSON.products.length; i++) {
   console.log(productPrices.responseJSON.products[i].display_name);
 
-  // var eachDisplay = productPrices.responseJSON.products[i].display_name;
-  // var eachDes = productPrices.responseJSON.products[i].description;
-  // $("h1").after("<h3>" + eachDisplay + "</h3>" + "<p>" + eachDes + "</p>");
+  // Using jQuery
+  // var eachDisplayName = productPrices.responseJSON.products[i].display_name;
+  // var eachDescription = productPrices.responseJSON.products[i].description;
+  // $("h1").after("<div>" + "<h3>" + eachDisplayName + "</h3>" + "<p>" + eachDescription + "</p>" + "</div>");
 
+  // Using Vanilla JavaScript
   var h1 = document.getElementsByTagName("h1");
   var body = document.getElementsByTagName("body");
   var uberElement = document.createElement("div");
@@ -61,10 +63,21 @@ for (var i = 0; i < productPrices.responseJSON.products.length; i++) {
   var displayH3 = document.createElement("h3");
   displayH3.innerHTML = productPrices.responseJSON.products[i].display_name;
   uberElement.appendChild(displayH3);
+  var img = document.createElement("img");
+  img.src =  productPrices.responseJSON.products[i].image;
+  uberElement.appendChild(img);
   var descP = document.createElement("p");
   descP.innerHTML = productPrices.responseJSON.products[i].description;
   uberElement.appendChild(descP);
-
+  var costUL = document.createElement("ul");
+  var eachLI = document.createElement("li");
+  if (productPrices.responseJSON.products[i].price_details !== null){
+    eachLI.innerHTML = "Base Price: $" + productPrices.responseJSON.products[i].price_details.base;
+  }else{
+    eachLI.innerHTML = "Base Price: N/A";
+  }
+  uberElement.appendChild(costUL);
+  costUL.appendChild(eachLI);
 }
 
 
